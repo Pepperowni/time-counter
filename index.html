@@ -1,242 +1,667 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Time Since</title>
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width,
+        initial-scale=1.0,
+        maximum-scale=1.0,
+        user-scalable=no">
+
+    <meta name="theme-color" content="#0d0d12">
+
+    <title>V+M</title>
 
     <style>
+
         * {
             box-sizing: border-box;
         }
 
         body {
+
             margin: 0;
+
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #111111;
+
+            background:
+                radial-gradient(
+                    circle at top,
+                    #2b1824 0%,
+                    #111116 45%,
+                    #09090c 100%
+                );
+
             color: white;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "SF Pro Display",
+                "Segoe UI",
+                sans-serif;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            overflow: hidden;
         }
 
+
         .app {
+
             width: 100%;
-            max-width: 500px;
-            padding: 30px;
+
+            max-width: 520px;
+
+            padding: 30px 22px;
+
             text-align: center;
         }
 
-        h1 {
-            font-size: 22px;
-            font-weight: 500;
-            margin-bottom: 10px;
+
+        /* HEADER */
+
+        .heart {
+
+            font-size: 38px;
+
+            margin-bottom: 4px;
+
+            animation:
+                heartbeat 2.2s infinite;
         }
 
-        .date {
-            color: #999;
-            margin-bottom: 40px;
+
+        .title {
+
+            font-size: 34px;
+
+            font-weight: 700;
+
+            letter-spacing: 2px;
+
+            margin: 0;
         }
+
+
+        .since {
+
+            margin-top: 4px;
+
+            font-size: 17px;
+
+            color: #b9aab2;
+
+            letter-spacing: 3px;
+
+            text-transform: lowercase;
+        }
+
+
+        /* DATE */
+
+        .start-date {
+
+            margin-top: 28px;
+
+            font-size: 15px;
+
+            color: #aaa0a6;
+        }
+
+
+        /* MAIN COUNTER */
 
         .counter {
-            font-size: 38px;
-            font-weight: 700;
-            line-height: 1.4;
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 10px;
+
+            margin-top: 28px;
         }
+
+
+        .unit {
+
+            background:
+                rgba(255,255,255,0.06);
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+
+            border-radius: 18px;
+
+            padding: 18px 10px 14px;
+
+            width: 30%;
+
+            backdrop-filter:
+                blur(12px);
+
+            box-shadow:
+                0 10px 30px
+                rgba(0,0,0,0.25);
+        }
+
+
+        .number {
+
+            font-size: 35px;
+
+            font-weight: 700;
+
+            line-height: 1;
+        }
+
 
         .label {
-            font-size: 16px;
-            color: #999;
-            margin-top: 5px;
+
+            margin-top: 9px;
+
+            font-size: 11px;
+
+            color: #aaa0a6;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
         }
+
+
+        /* CLOCK */
+
+        .clock {
+
+            margin-top: 18px;
+
+            font-size: 34px;
+
+            font-weight: 600;
+
+            letter-spacing: 2px;
+
+            font-variant-numeric:
+                tabular-nums;
+
+            text-shadow:
+                0 0 25px
+                rgba(255,255,255,0.12);
+        }
+
+
+        /* BUTTON */
 
         button {
-            margin-top: 45px;
-            padding: 14px 24px;
+
+            margin-top: 32px;
+
+            padding: 14px 26px;
+
             border: none;
-            border-radius: 12px;
+
+            border-radius: 30px;
+
             background: white;
-            color: black;
-            font-size: 16px;
-            cursor: pointer;
+
+            color: #151116;
+
+            font-size: 15px;
+
+            font-weight: 600;
+
+            box-shadow:
+                0 8px 25px
+                rgba(0,0,0,0.25);
+
+            transition:
+                transform 0.15s;
         }
 
+
         button:active {
-            transform: scale(0.97);
+
+            transform:
+                scale(0.94);
         }
+
+
+        /* HEART ANIMATION */
+
+        @keyframes heartbeat {
+
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            10% {
+                transform: scale(1.12);
+            }
+
+            20% {
+                transform: scale(1);
+            }
+
+            30% {
+                transform: scale(1.08);
+            }
+
+            40% {
+                transform: scale(1);
+            }
+        }
+
+
+        /* SMALL PHONES */
+
+        @media (max-width: 360px) {
+
+            .number {
+                font-size: 29px;
+            }
+
+            .clock {
+                font-size: 29px;
+            }
+
+            .title {
+                font-size: 30px;
+            }
+        }
+
     </style>
+
 </head>
+
 
 <body>
 
+
 <div class="app">
 
-    <h1>TIME SINCE</h1>
 
-    <div class="date" id="startDate">
-        Select a date
+    <div class="heart">
+        ❤️
     </div>
 
-    <div class="counter" id="counter">
-        0 years<br>
-        0 months<br>
-        0 days<br>
-        00:00:00
+
+    <h1 class="title">
+        V+M
+    </h1>
+
+
+    <div class="since">
+        since
     </div>
+
+
+    <div
+        class="start-date"
+        id="startDate">
+    </div>
+
+
+    <div class="counter">
+
+
+        <div class="unit">
+
+            <div
+                class="number"
+                id="years">
+                0
+            </div>
+
+            <div class="label">
+                Years
+            </div>
+
+        </div>
+
+
+        <div class="unit">
+
+            <div
+                class="number"
+                id="months">
+                0
+            </div>
+
+            <div class="label">
+                Months
+            </div>
+
+        </div>
+
+
+        <div class="unit">
+
+            <div
+                class="number"
+                id="days">
+                0
+            </div>
+
+            <div class="label">
+                Days
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <div
+        class="clock"
+        id="clock">
+
+        00 : 00 : 00
+
+    </div>
+
 
     <button onclick="chooseDate()">
-        Choose Start Date
+
+        Change Start Date
+
     </button>
+
 
 </div>
 
+
+
 <script>
 
-    // Change this date to whatever you want.
-    // Format: YYYY-MM-DDTHH:MM:SS
-    let startDate = new Date("2010-08-14T12:00:00");
 
+    /*
+     * YOUR START DATE
+     *
+     * Change this later if you want.
+     *
+     * Format:
+     *
+     * YYYY-MM-DDTHH:MM:SS
+     */
+
+    let startDate =
+        new Date("2010-08-14T12:00:00");
+
+
+
+    /*
+     * CALCULATE EVERYTHING
+     */
 
     function calculateTime() {
 
+
         const now = new Date();
 
-        let years = now.getFullYear() - startDate.getFullYear();
 
-        let testDate = new Date(startDate);
+        /*
+         * YEARS
+         */
+
+        let years =
+            now.getFullYear()
+            -
+            startDate.getFullYear();
+
+
+        let testDate =
+            new Date(startDate);
+
+
         testDate.setFullYear(
-            startDate.getFullYear() + years
+            startDate.getFullYear()
+            +
+            years
         );
 
-        // If we haven't reached the anniversary yet,
-        // subtract one year.
+
         if (testDate > now) {
+
             years--;
-            testDate = new Date(startDate);
+
+            testDate =
+                new Date(startDate);
+
             testDate.setFullYear(
-                startDate.getFullYear() + years
+                startDate.getFullYear()
+                +
+                years
             );
         }
 
 
+
+        /*
+         * MONTHS
+         */
+
         let months =
-            now.getMonth() - testDate.getMonth();
+            now.getMonth()
+            -
+            testDate.getMonth();
+
 
         if (months < 0) {
+
             months += 12;
         }
 
 
-        let monthDate = new Date(testDate);
+        let monthDate =
+            new Date(testDate);
+
+
         monthDate.setMonth(
-            testDate.getMonth() + months
+            testDate.getMonth()
+            +
+            months
         );
 
 
         if (monthDate > now) {
+
             months--;
 
-            monthDate = new Date(testDate);
+            monthDate =
+                new Date(testDate);
+
             monthDate.setMonth(
-                testDate.getMonth() + months
+                testDate.getMonth()
+                +
+                months
             );
         }
 
 
-        // Remaining difference in milliseconds
+
+        /*
+         * REMAINING TIME
+         */
+
         const difference =
-            now.getTime() - monthDate.getTime();
+            now.getTime()
+            -
+            monthDate.getTime();
 
 
         const totalSeconds =
-            Math.floor(difference / 1000);
+            Math.floor(
+                difference / 1000
+            );
 
 
         const days =
-            Math.floor(totalSeconds / 86400);
+            Math.floor(
+                totalSeconds / 86400
+            );
 
 
-        const remainingAfterDays =
+        const remaining =
             totalSeconds % 86400;
 
 
         const hours =
-            Math.floor(remainingAfterDays / 3600);
+            Math.floor(
+                remaining / 3600
+            );
 
 
         const minutes =
             Math.floor(
-                (remainingAfterDays % 3600) / 60
+                (remaining % 3600) / 60
             );
 
 
         const seconds =
-            remainingAfterDays % 60;
+            remaining % 60;
 
 
-        // Display the result
-        document.getElementById("counter").innerHTML =
-            `${years} years<br>
-             ${months} months<br>
-             ${days} days<br>
-             ${String(hours).padStart(2, "0")}:
-             ${String(minutes).padStart(2, "0")}:
-             ${String(seconds).padStart(2, "0")}`;
+
+        /*
+         * UPDATE SCREEN
+         */
+
+        document.getElementById(
+            "years"
+        ).textContent = years;
 
 
-        document.getElementById("startDate").textContent =
-            startDate.toLocaleString();
+        document.getElementById(
+            "months"
+        ).textContent = months;
+
+
+        document.getElementById(
+            "days"
+        ).textContent = days;
+
+
+        document.getElementById(
+            "clock"
+        ).textContent =
+
+            String(hours).padStart(2, "0")
+            +
+            " : "
+            +
+            String(minutes).padStart(2, "0")
+            +
+            " : "
+            +
+            String(seconds).padStart(2, "0");
+
+
+
+        /*
+         * DATE DISPLAY
+         */
+
+        document.getElementById(
+            "startDate"
+        ).textContent =
+
+            "Since "
+            +
+            startDate.toLocaleString(
+                undefined,
+                {
+                    dateStyle: "long",
+                    timeStyle: "short"
+                }
+            );
+
     }
 
 
+
+    /*
+     * CHANGE START DATE
+     */
+
     function chooseDate() {
+
 
         const input =
             prompt(
                 "Enter your starting date and time:\n\n" +
-                "Example: 2010-08-14 12:00:00"
+                "Example:\n" +
+                "2020-02-29 12:00:00"
             );
+
 
         if (!input) return;
 
 
         const formatted =
-            input.replace(" ", "T");
+            input.replace(
+                " ",
+                "T"
+            );
 
 
         const newDate =
             new Date(formatted);
 
 
-        if (isNaN(newDate.getTime())) {
+        if (
+            isNaN(
+                newDate.getTime()
+            )
+        ) {
 
             alert(
-                "That date doesn't seem to be valid."
+                "Please enter a valid date."
             );
 
             return;
         }
 
 
-        startDate = newDate;
+        startDate =
+            newDate;
+
 
         calculateTime();
+
     }
 
 
-    // Update immediately
+
+    /*
+     * START
+     */
+
     calculateTime();
 
 
-    // Update every second
+    /*
+     * UPDATE EVERY SECOND
+     */
+
     setInterval(
         calculateTime,
         1000
     );
 
+
 </script>
 
+
 </body>
+
 </html>

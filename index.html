@@ -9,13 +9,14 @@
       content="width=device-width,
       initial-scale=1.0,
       maximum-scale=1.0,
-      user-scalable=no">
+      user-scalable=no,
+      viewport-fit=cover">
 
-<meta name="theme-color" content="#08080c">
+<meta name="theme-color"
+      content="#09090d">
 
-<link rel="apple-touch-icon" href="vm-app-icon.png">
-
-<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable"
+      content="yes">
 
 <meta name="apple-mobile-web-app-status-bar-style"
       content="black-translucent">
@@ -23,6 +24,8 @@
 <meta name="apple-mobile-web-app-title"
       content="V + M">
 
+<link rel="apple-touch-icon"
+      href="vm-app-icon.png">
 
 <title>❤️ V + M ❤️</title>
 
@@ -30,32 +33,30 @@
 <style>
 
 /* =========================
-   BASIC SETUP
+   BASIC
 ========================= */
 
 * {
     box-sizing: border-box;
 }
 
-html,
-body {
+html {
     margin: 0;
     padding: 0;
+
     width: 100%;
     height: 100%;
-}
 
+    background: #09090d;
+}
 
 body {
 
-    font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "SF Pro Display",
-        "Helvetica Neue",
-        sans-serif;
+    margin: 0;
+    padding: 0;
 
-    color: white;
+    width: 100%;
+    min-height: 100%;
 
     background:
         radial-gradient(
@@ -66,23 +67,38 @@ body {
             #07070a 100%
         );
 
+    color: white;
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "SF Pro Display",
+        "Helvetica Neue",
+        sans-serif;
+
     overflow: hidden;
+
+    /*
+       Important:
+       The background is allowed to extend
+       behind the iPhone status bar.
+    */
 }
 
 
 /* =========================
-   BACKGROUND LIGHT
+   BACKGROUND GLOW
 ========================= */
 
 .glow {
 
     position: fixed;
 
-    width: 420px;
-    height: 420px;
+    width: 450px;
+    height: 450px;
 
     left: 50%;
-    top: 30%;
+    top: 25%;
 
     transform:
         translate(-50%, -50%);
@@ -90,8 +106,8 @@ body {
     background:
         radial-gradient(
             circle,
-            rgba(255, 105, 155, 0.12),
-            transparent 68%
+            rgba(255, 70, 130, 0.12),
+            transparent 70%
         );
 
     filter: blur(20px);
@@ -107,6 +123,7 @@ body {
 
     0%, 100% {
         opacity: 0.6;
+
         transform:
             translate(-50%, -50%)
             scale(1);
@@ -114,6 +131,7 @@ body {
 
     50% {
         opacity: 1;
+
         transform:
             translate(-50%, -50%)
             scale(1.15);
@@ -127,10 +145,14 @@ body {
 
 .app {
 
-    position: relative;
-
     width: 100%;
-    height: 100%;
+
+    /*
+       100dvh works better on modern iPhones
+       than the old 100vh.
+    */
+
+    height: 100dvh;
 
     display: flex;
 
@@ -138,10 +160,28 @@ body {
 
     align-items: center;
 
-    padding:
-        env(safe-area-inset-top)
-        20px
-        env(safe-area-inset-bottom)
+    /*
+       Safe area is handled here rather
+       than on the body, so the background
+       still reaches the top.
+    */
+
+    padding-top:
+        calc(
+            env(safe-area-inset-top)
+            + 10px
+        );
+
+    padding-right:
+        20px;
+
+    padding-bottom:
+        calc(
+            env(safe-area-inset-bottom)
+            + 10px
+        );
+
+    padding-left:
         20px;
 }
 
@@ -149,13 +189,10 @@ body {
 .content {
 
     width: 100%;
+
     max-width: 520px;
 
     text-align: center;
-
-    position: relative;
-
-    z-index: 2;
 }
 
 
@@ -184,8 +221,7 @@ body {
 
 @keyframes heartbeat {
 
-    0%,
-    100% {
+    0%, 100% {
         transform: scale(1);
     }
 
@@ -299,7 +335,7 @@ body {
 
 
 /* =========================
-   YEAR / MONTH / DAY
+   YEARS / MONTHS / DAYS
 ========================= */
 
 .units {
@@ -402,7 +438,7 @@ body {
 
 
 /* =========================
-   SMALL TEXT
+   FOOTER
 ========================= */
 
 .footer {
@@ -443,7 +479,6 @@ body {
     .card {
         padding: 14px;
     }
-
 }
 
 
@@ -454,15 +489,22 @@ body {
 @media (orientation: landscape) {
 
     .app {
+
         align-items: flex-start;
+
         overflow-y: auto;
+
+        height: auto;
+
+        min-height: 100dvh;
     }
 
     .content {
+
         margin-top: 30px;
+
         margin-bottom: 30px;
     }
-
 }
 
 </style>
@@ -500,14 +542,14 @@ body {
     </div>
 
 
-    <!-- DATE -->
+    <!-- START DATE -->
 
     <div class="date">
         14 September 2025 · 17:00
     </div>
 
 
-    <!-- COUNTER CARD -->
+    <!-- COUNTER -->
 
     <div class="card">
 
@@ -569,7 +611,7 @@ body {
         </div>
 
 
-        <!-- LIVE CLOCK -->
+        <!-- LIVE HH : MM : SS -->
 
         <div
             class="clock"
@@ -618,7 +660,7 @@ const startDate =
 
 
 /* =========================
-   UPDATE COUNTER
+   CALCULATE TIME
 ========================= */
 
 function calculateTime() {
@@ -628,7 +670,9 @@ function calculateTime() {
         new Date();
 
 
-    /* YEARS */
+    /*
+     * YEARS
+     */
 
     let years =
         now.getFullYear()
@@ -662,7 +706,9 @@ function calculateTime() {
     }
 
 
-    /* MONTHS */
+    /*
+     * MONTHS
+     */
 
     let months =
         now.getMonth()
@@ -671,6 +717,7 @@ function calculateTime() {
 
 
     if (months < 0) {
+
         months += 12;
     }
 
@@ -701,7 +748,9 @@ function calculateTime() {
     }
 
 
-    /* REMAINING TIME */
+    /*
+     * REMAINING TIME
+     */
 
     const difference =
         now.getTime()
@@ -741,17 +790,29 @@ function calculateTime() {
         remaining % 60;
 
 
-    /* UPDATE NUMBERS */
+    /*
+     * UPDATE YEARS
+     */
 
     updateNumber(
         "years",
         years
     );
 
+
+    /*
+     * UPDATE MONTHS
+     */
+
     updateNumber(
         "months",
         months
     );
+
+
+    /*
+     * UPDATE DAYS
+     */
 
     updateNumber(
         "days",
@@ -759,7 +820,9 @@ function calculateTime() {
     );
 
 
-    /* UPDATE CLOCK */
+    /*
+     * UPDATE CLOCK
+     */
 
     document.getElementById(
         "clock"
@@ -774,6 +837,7 @@ function calculateTime() {
         " : "
         +
         String(seconds).padStart(2, "0");
+
 }
 
 
@@ -825,7 +889,9 @@ function updateNumber(
 calculateTime();
 
 
-/* UPDATE EVERY SECOND */
+/* =========================
+   UPDATE EVERY SECOND
+========================= */
 
 setInterval(
     calculateTime,

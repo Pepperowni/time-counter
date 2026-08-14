@@ -6,20 +6,22 @@
     <meta charset="UTF-8">
 
     <meta name="viewport"
-        content="width=device-width,
-        initial-scale=1.0,
-        maximum-scale=1.0,
-        user-scalable=no">
+          content="width=device-width,
+                   initial-scale=1.0,
+                   maximum-scale=1.0,
+                   user-scalable=no">
 
     <meta name="theme-color" content="#0d0d12">
 
-    <title>V+M</title>
+    <title>❤️ V+M ❤️</title>
+
 
     <style>
 
         * {
             box-sizing: border-box;
         }
+
 
         body {
 
@@ -30,9 +32,9 @@
             background:
                 radial-gradient(
                     circle at top,
-                    #2b1824 0%,
-                    #111116 45%,
-                    #09090c 100%
+                    #321b29 0%,
+                    #121217 45%,
+                    #08080b 100%
                 );
 
             color: white;
@@ -66,26 +68,23 @@
         }
 
 
-        /* HEADER */
-
         .heart {
 
-            font-size: 38px;
+            font-size: 40px;
 
             margin-bottom: 4px;
 
-            animation:
-                heartbeat 2.2s infinite;
+            animation: heartbeat 2.2s infinite;
         }
 
 
         .title {
 
-            font-size: 34px;
+            font-size: 36px;
 
             font-weight: 700;
 
-            letter-spacing: 2px;
+            letter-spacing: 3px;
 
             margin: 0;
         }
@@ -93,31 +92,25 @@
 
         .since {
 
-            margin-top: 4px;
+            margin-top: 5px;
 
             font-size: 17px;
 
-            color: #b9aab2;
+            color: #b8aab2;
 
-            letter-spacing: 3px;
-
-            text-transform: lowercase;
+            letter-spacing: 4px;
         }
 
-
-        /* DATE */
 
         .start-date {
 
             margin-top: 28px;
 
-            font-size: 15px;
+            font-size: 14px;
 
-            color: #aaa0a6;
+            color: #999098;
         }
 
-
-        /* MAIN COUNTER */
 
         .counter {
 
@@ -133,44 +126,47 @@
 
         .unit {
 
+            width: 31%;
+
+            padding: 20px 8px 15px;
+
             background:
-                rgba(255,255,255,0.06);
+                rgba(255,255,255,0.055);
 
             border:
-                1px solid rgba(255,255,255,0.08);
+                1px solid
+                rgba(255,255,255,0.08);
 
-            border-radius: 18px;
+            border-radius: 20px;
 
-            padding: 18px 10px 14px;
-
-            width: 30%;
-
-            backdrop-filter:
-                blur(12px);
+            backdrop-filter: blur(14px);
 
             box-shadow:
-                0 10px 30px
-                rgba(0,0,0,0.25);
+                0 12px 35px
+                rgba(0,0,0,0.28);
         }
 
 
         .number {
 
-            font-size: 35px;
+            font-size: 36px;
 
             font-weight: 700;
 
             line-height: 1;
+
+            font-variant-numeric:
+                tabular-nums;
         }
 
 
         .label {
 
-            margin-top: 9px;
+            margin-top: 10px;
 
-            font-size: 11px;
+            font-size: 10px;
 
-            color: #aaa0a6;
+            color: #aaa1a7;
 
             letter-spacing: 1.5px;
 
@@ -178,13 +174,11 @@
         }
 
 
-        /* CLOCK */
-
         .clock {
 
-            margin-top: 18px;
+            margin-top: 22px;
 
-            font-size: 34px;
+            font-size: 35px;
 
             font-weight: 600;
 
@@ -198,44 +192,6 @@
                 rgba(255,255,255,0.12);
         }
 
-
-        /* BUTTON */
-
-        button {
-
-            margin-top: 32px;
-
-            padding: 14px 26px;
-
-            border: none;
-
-            border-radius: 30px;
-
-            background: white;
-
-            color: #151116;
-
-            font-size: 15px;
-
-            font-weight: 600;
-
-            box-shadow:
-                0 8px 25px
-                rgba(0,0,0,0.25);
-
-            transition:
-                transform 0.15s;
-        }
-
-
-        button:active {
-
-            transform:
-                scale(0.94);
-        }
-
-
-        /* HEART ANIMATION */
 
         @keyframes heartbeat {
 
@@ -261,8 +217,6 @@
         }
 
 
-        /* SMALL PHONES */
-
         @media (max-width: 360px) {
 
             .number {
@@ -274,7 +228,7 @@
             }
 
             .title {
-                font-size: 30px;
+                font-size: 31px;
             }
         }
 
@@ -304,9 +258,8 @@
     </div>
 
 
-    <div
-        class="start-date"
-        id="startDate">
+    <div class="start-date">
+        14 September 2025 · 17:00
     </div>
 
 
@@ -357,7 +310,6 @@
 
         </div>
 
-
     </div>
 
 
@@ -370,13 +322,6 @@
     </div>
 
 
-    <button onclick="chooseDate()">
-
-        Change Start Date
-
-    </button>
-
-
 </div>
 
 
@@ -385,23 +330,22 @@
 
 
     /*
-     * YOUR START DATE
+     * FIXED START DATE
      *
-     * Change this later if you want.
-     *
-     * Format:
-     *
-     * YYYY-MM-DDTHH:MM:SS
+     * 14 September 2025
+     * 17:00 local time
      */
 
-    let startDate =
-        new Date("2010-08-14T12:00:00");
+    const startDate =
+        new Date(
+            2025,
+            8,
+            14,
+            17,
+            0,
+            0
+        );
 
-
-
-    /*
-     * CALCULATE EVERYTHING
-     */
 
     function calculateTime() {
 
@@ -419,31 +363,30 @@
             startDate.getFullYear();
 
 
-        let testDate =
+        let anniversary =
             new Date(startDate);
 
 
-        testDate.setFullYear(
+        anniversary.setFullYear(
             startDate.getFullYear()
             +
             years
         );
 
 
-        if (testDate > now) {
+        if (anniversary > now) {
 
             years--;
 
-            testDate =
+            anniversary =
                 new Date(startDate);
 
-            testDate.setFullYear(
+            anniversary.setFullYear(
                 startDate.getFullYear()
                 +
                 years
             );
         }
-
 
 
         /*
@@ -453,50 +396,48 @@
         let months =
             now.getMonth()
             -
-            testDate.getMonth();
+            anniversary.getMonth();
 
 
         if (months < 0) {
-
             months += 12;
         }
 
 
-        let monthDate =
-            new Date(testDate);
+        let monthPoint =
+            new Date(anniversary);
 
 
-        monthDate.setMonth(
-            testDate.getMonth()
+        monthPoint.setMonth(
+            anniversary.getMonth()
             +
             months
         );
 
 
-        if (monthDate > now) {
+        if (monthPoint > now) {
 
             months--;
 
-            monthDate =
-                new Date(testDate);
+            monthPoint =
+                new Date(anniversary);
 
-            monthDate.setMonth(
-                testDate.getMonth()
+            monthPoint.setMonth(
+                anniversary.getMonth()
                 +
                 months
             );
         }
 
 
-
         /*
-         * REMAINING TIME
+         * REMAINING DAYS + TIME
          */
 
         const difference =
             now.getTime()
             -
-            monthDate.getTime();
+            monthPoint.getTime();
 
 
         const totalSeconds =
@@ -511,29 +452,28 @@
             );
 
 
-        const remaining =
+        const remainingSeconds =
             totalSeconds % 86400;
 
 
         const hours =
             Math.floor(
-                remaining / 3600
+                remainingSeconds / 3600
             );
 
 
         const minutes =
             Math.floor(
-                (remaining % 3600) / 60
+                (remainingSeconds % 3600) / 60
             );
 
 
         const seconds =
-            remaining % 60;
-
+            remainingSeconds % 60;
 
 
         /*
-         * UPDATE SCREEN
+         * UPDATE DISPLAY
          */
 
         document.getElementById(
@@ -565,81 +505,7 @@
             +
             String(seconds).padStart(2, "0");
 
-
-
-        /*
-         * DATE DISPLAY
-         */
-
-        document.getElementById(
-            "startDate"
-        ).textContent =
-
-            "Since "
-            +
-            startDate.toLocaleString(
-                undefined,
-                {
-                    dateStyle: "long",
-                    timeStyle: "short"
-                }
-            );
-
     }
-
-
-
-    /*
-     * CHANGE START DATE
-     */
-
-    function chooseDate() {
-
-
-        const input =
-            prompt(
-                "Enter your starting date and time:\n\n" +
-                "Example:\n" +
-                "2020-02-29 12:00:00"
-            );
-
-
-        if (!input) return;
-
-
-        const formatted =
-            input.replace(
-                " ",
-                "T"
-            );
-
-
-        const newDate =
-            new Date(formatted);
-
-
-        if (
-            isNaN(
-                newDate.getTime()
-            )
-        ) {
-
-            alert(
-                "Please enter a valid date."
-            );
-
-            return;
-        }
-
-
-        startDate =
-            newDate;
-
-
-        calculateTime();
-
-    }
-
 
 
     /*
@@ -657,7 +523,6 @@
         calculateTime,
         1000
     );
-
 
 </script>
 
